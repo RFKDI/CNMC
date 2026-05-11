@@ -3,6 +3,7 @@ import pandas as pd
 import io
 import re
 import xlrd
+from xlsxwriter.utility import xl_col_to_name
 
 # Authorized portal reasons (Full List)
 FAULT_TYPES = sorted([
@@ -170,7 +171,7 @@ if st.button("🚀 Process & Generate Report"):
 
                     # Write Excel Formulas for Auto-Updating Status
                     for row_num in range(1, len(combined_df) + 1):
-                        fault_cell = xlrd.colname(fault_col) + str(row_num + 1)
+                        fault_cell = xl_col_to_name(fault_col) + str(row_num + 1)
                         # Formula: If fault type is blank, status is PENDING, else CLOSED
                         formula = f'=IF(TRIM({fault_cell})="", "PENDING", "CLOSED")'
                         worksheet.write_formula(row_num, status_col, formula)
