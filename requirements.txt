@@ -4,3 +4,4 @@ xlrd
 xlsxwriter
 openpyxl
 lxml
+numpy
